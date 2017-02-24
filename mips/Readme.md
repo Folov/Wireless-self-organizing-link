@@ -14,7 +14,7 @@
 也可以在/etc/rc.d/rc.local中添加一行：sh /Wireless_self_organizing_link.sh，开机自动运行。
 
 ## 使用限制
-进用于测试路由器，其ip地址只能为192.168.1.12,因为初始化脚本ap12.sh将会初始化路由器lan地址为192.168.1.12
+用于测试路由器，其ip地址只能为192.168.1.12,因为初始化脚本ap12.sh将会初始化路由器lan地址为192.168.1.12
 只能用于mips架构的路由器。在此为老师的PCB。
 chooserouter.c文件需要使用特定的编译器进行编译，需要使用mips-openwrt-linux-gcc进行编译。该编译工具需要对路由器的openwrt系统源文件进行编译获得。
 
