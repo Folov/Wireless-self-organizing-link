@@ -5,6 +5,7 @@
 2. 增加了findrouter.sh脚本的延时，增加了不正常退出的提示。
 3. 修改了C程序，增加了SSID数组的大小，在周围含有中文热点时由于编码规则不同会导致溢出，出现segmentation fault。已解决
 4. 解决了bug：当周围没有openwrt的AP时，会自动连接到信号最强的其他AP，因此修改了C文件中的bestrouter赋值方法，当周围没有openwrt的AP热点时，exit(1)不更换连接，保持上一次的client连接。
+5. 优化了连接规则，只有当信号强度比当前连接信号强度多20dbm时才会改变连接。
 
 ## 进展
 此程序可以放入/etc/rc.d/rc.local中开机运行

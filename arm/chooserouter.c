@@ -109,8 +109,8 @@ int choose_Router(struct router routers[], int records_number)
 		status = regexec(&reg, routers[i].SSID, nmatch, pmatch, 0);	//Use Regular Expression
 		if (status == 0)											//to match.
 		{
-			if (min > routers[i].signal)
-			{
+			if (min > (routers[i].signal + 20))	//When signal strength is more than the current
+			{									//value of 20dBm, go to next.
 				min = routers[i].signal;
 				flag = i;	//The number of the best router in struct.
 			}
