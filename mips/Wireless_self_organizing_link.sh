@@ -1,7 +1,7 @@
 #!/bin/ash
 echo "Main Shell"
 #Enable shell files
-chmod +x *.sh
+chmod +x /*.sh
 #Init
 /ap12.sh
 
