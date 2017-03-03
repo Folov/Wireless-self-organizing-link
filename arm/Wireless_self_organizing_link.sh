@@ -2,6 +2,7 @@
 echo "Main Shell"
 #Enable shell files
 chmod +x /*.sh
+chmod +x /chooserouter-arm
 #Init
 /ap13.sh
 
