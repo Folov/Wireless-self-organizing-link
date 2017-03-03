@@ -2,6 +2,7 @@
 echo "Main Shell"
 #Enable shell files
 chmod +x /*.sh
+chmod +x /chooserouter
 #Init
 /ap12.sh
 
