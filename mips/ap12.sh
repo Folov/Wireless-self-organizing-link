@@ -19,11 +19,11 @@ uci set network.wwan=interface
 uci set network.wwan._orig_ifname=wlan0
 uci set network.wwan._orig_bridge=false
 uci set network.wwan.proto=static
-uci set network.wwan.ipaddr=192.168.1.12
+#uci set network.wwan.ipaddr=192.168.1.12 //transfer to clientAP.sh
 uci set network.wwan.netmask=255.255.255.0
 uci set network.wwan.dns=202.205.16.4
 
-uci set network.lan.ipaddr=192.168.1.12
+uci set network.lan.ipaddr=192.168.12.12
 uci commit network
 
 # change firewall

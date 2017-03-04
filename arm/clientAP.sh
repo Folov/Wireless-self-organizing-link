@@ -8,7 +8,8 @@ do
 	#use SSID decide gateway ip
 		gateway_ip=`echo $line | sed 's/openwrt//'`
 
-		uci set network.wwan.gateway=192.168.1.$gateway_ip
+		uci set network.wwan.ipaddr=192.168.$gateway_ip.13
+		uci set network.wwan.gateway=192.168.$gateway_ip.$gateway_ip
 		uci commit network
 		uci set wireless.@wifi-iface[0].ssid=$line
 	else
