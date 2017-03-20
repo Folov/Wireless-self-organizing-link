@@ -12,7 +12,6 @@ do
 		uci set network.wwan.gateway=192.168.$gateway_ip.$gateway_ip
 		uci commit network
 		uci set wireless.@wifi-iface[0].ssid=$line
-		uci commit wireless
 	else
 		uci set wireless.@wifi-iface[0].device=radio0
 		uci set wireless.@wifi-iface[0].mode=sta
@@ -20,8 +19,8 @@ do
 		uci set wireless.@wifi-iface[0].network=wwan
 		uci set wireless.@wifi-iface[0].bssid=$line
 		uci commit wireless
-		echo "done"
-		wifi down
+
+		ifconfig wlan0 down
 		wifi
 
 		break
