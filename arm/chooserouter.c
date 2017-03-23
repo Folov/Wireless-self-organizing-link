@@ -1,7 +1,10 @@
 /**********************************************************************
-This C file is used for choose the best router from 
-routerlist.txt(from findrouter.sh).And connect the
-best router by clientAP.sh.
+Time: 2017/3/23
+Auther: GYH
+Function: This C file is used for choose the best router from 
+routerlist.txt(from findrouter.sh).It can fix whether the chosen router
+is the same as oldrouter that has been writen in 'bestrouter.txt'. Also,
+if the 'routerlist.txt' not exit or empty, this file will not return 0.
 
 returned value: 0			1					2					3
 meanning: 	 normal	 needn't update	 file not exist or empty  can't open file
@@ -24,7 +27,6 @@ struct router
 struct router bestrouter;
 int read_Routers(char filename[],struct router routers[], int max);
 int choose_Router(struct router routers[], int records_number);
-// void write_bestrouter_file(char filename[], struct router bestrouter);
 
 int main(int argc, char *argv[])
 {
@@ -90,7 +92,7 @@ int read_Routers(char filename[],struct router routers[], int max)
 }
 /***************************************************************************************
 Choose the best dBm from routers[].signal(use Regular Expression),and put put the best
-record to a struct.
+record to a struct 'bestrouter[]'.
 
 ***************************************************************************************/
 int choose_Router(struct router routers[], int records_number)
@@ -117,7 +119,7 @@ int choose_Router(struct router routers[], int records_number)
 		}
 		regfree(&reg);
 	}
-
+	// If flag=0, means that no approprite AP or only the connected AP at the top of 'routerlist.txt'
 	if (flag != 0)
 	{
 		strcpy(bestrouter.BSS, routers[flag].BSS);	//put the best record to struct"bestrouter"
@@ -130,16 +132,3 @@ int choose_Router(struct router routers[], int records_number)
 	return 0;
 }
 
-// void write_bestrouter_file(char filename[], struct router bestrouter)
-// {
-// 	FILE *fd;
-// 	int i;
-
-// 	if ((fd = fopen(filename, "w")) == NULL)
-// 	{
-// 		perror("fopen");
-// 		exit(1);
-// 	}
-// 	fprintf(fd, "%s\n%s\n", bestrouter.SSID, bestrouter.BSS);
-// 	fclose(fd);
-// }

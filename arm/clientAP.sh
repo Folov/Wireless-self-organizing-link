@@ -1,6 +1,12 @@
 #!/bin/ash
 echo "clientAP"
+# This file is to client given AP by 'bestrouter.txt', modifying the wwan's
+# ip and gateway and ssid, changing wireless iface's bssid.
+
 count=1
+# This while loop is to use a beautiful tool for read in a line from a file.
+# The loop runs 2 times to read 2 lines from 'bestrouter.txt', each line is
+# used for different functions.
 cat /tmp/bestrouter.txt | while read line
 do
 	if [ $count -eq 1 ]
@@ -12,6 +18,7 @@ do
 		uci set network.wwan.gateway=192.168.$gateway_ip.$gateway_ip
 		uci commit network
 		uci set wireless.@wifi-iface[0].ssid=$line
+		uci commit wireless
 	else
 		uci set wireless.@wifi-iface[0].device=radio1
 		uci set wireless.@wifi-iface[0].mode=sta
@@ -19,8 +26,10 @@ do
 		uci set wireless.@wifi-iface[0].network=wwan
 		uci set wireless.@wifi-iface[0].bssid=$line
 		uci commit wireless
-
-		ifconfig wlan1 down
+		
+		echo "done"
+		# need restart wifi!
+		wifi down
 		wifi
 
 		break

@@ -1,6 +1,10 @@
 #!/bin/ash
 echo "ap13"
+#Use this apxx.sh, we can build an AP, change lan ip to 192.168.xx.xx, close
+#dhcp, and build the wwan iface for clientAP.
+
 # build ap
+# arm for Linksys use radio1 as 2.4GHz AP.
 uci set wireless.radio1.channel=6
 uci set wireless.radio1.txpower=19
 uci set wireless.radio1.country=US
@@ -19,9 +23,9 @@ uci set network.wwan=interface
 uci set network.wwan._orig_ifname=wlan1
 uci set network.wwan._orig_bridge=false
 uci set network.wwan.proto=static
-#uci set network.wwan.ipaddr=192.168.1.13
+#uci set network.wwan.ipaddr=192.168.1.13 //transfer to clientAP.sh
 uci set network.wwan.netmask=255.255.255.0
-uci set network.wwan.dns=202.205.16.4
+# uci set network.wwan.dns=202.205.16.4 //we needn't dns
 
 uci set network.lan.ipaddr=192.168.13.13
 uci commit network
