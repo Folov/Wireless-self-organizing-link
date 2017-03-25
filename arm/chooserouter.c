@@ -117,18 +117,21 @@ int choose_Router(struct router routers[], int records_number)
 				flag = i;	//The number of the best router in struct.
 			}
 		}
-		regfree(&reg);
+		// regfree(&reg);
 	}
-	// If flag=0, means that no approprite AP or only the connected AP at the top of 'routerlist.txt'
-	if (flag != 0)
+	//To check whether routers[flag] inappropriate.
+	if (regexec(&reg, routers[flag].SSID, nmatch, pmatch, 0))
 	{
+		regfree(&reg);
+		return 0;
+	}
+	else
+	{
+		regfree(&reg);
 		strcpy(bestrouter.BSS, routers[flag].BSS);	//put the best record to struct"bestrouter"
 		bestrouter.signal = routers[flag].signal;
 		strcpy(bestrouter.SSID, routers[flag].SSID);
+		return 1;
 	}
-	else
-		exit(1);	//no fitted AP, needn't update
-
-	return 0;
 }
 
